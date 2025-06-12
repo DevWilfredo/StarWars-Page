@@ -1,11 +1,23 @@
-import { Instagram, Facebook, Youtube, Heart, X } from "lucide-react";
+import { useState } from "react";
+import {
+  Instagram,
+  Facebook,
+  Youtube,
+  Heart,
+  X,
+  Github,
+  Linkedin,
+  Twitter,
+  Menu,
+} from "lucide-react";
 import { NavLink } from "react-router";
 import { useAppContext } from "../context/AppContext";
-import { useState } from "react";
+import SidebarSocial from "./SideBarSocial";
 
 export default function Navbar() {
   const { favorites, removeFavorite } = useAppContext();
   const [showFavs, setShowFavs] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleBackdropClick = (e) => {
     if (e.target.id === "fav-backdrop") setShowFavs(false);
@@ -14,13 +26,49 @@ export default function Navbar() {
   return (
     <header className="bg-black text-white border-b border-gray-800 relative z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-3 text-white">
-          <Instagram className="w-5 h-5 cursor-pointer" />
-          <Facebook className="w-5 h-5 cursor-pointer" />
-          <Youtube className="w-5 h-5 cursor-pointer" />
+        <button
+          className="md:hidden text-white text-2xl mr-2"
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Abrir menú social"
+        >
+          <Menu className="w-8 h-8" />
+        </button>
+        <div className="hidden md:flex items-center gap-3 text-white">
+          <a
+            href="https://www.instagram.com/starwars/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-yellow-400"
+          >
+            <Instagram className="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.facebook.com/StarWars"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-yellow-400"
+          >
+            <Facebook className="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.youtube.com/user/starwars"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-yellow-400"
+          >
+            <Youtube className="w-5 h-5" />
+          </a>
+          <a
+            href="https://x.com/starwars"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-yellow-400"
+          >
+            <Twitter className="w-5 h-5" />
+          </a>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center flex-1">
           <NavLink to="/">
             <img
               src="https://lumiere-a.akamaihd.net/v1/images/sw_logo_stacked_2x-52b4f6d33087_7ef430af.png?region=0,0,586,254"
@@ -29,6 +77,7 @@ export default function Navbar() {
             />
           </NavLink>
         </div>
+
         <div className="relative flex items-center">
           <button
             onClick={() => setShowFavs((prev) => !prev)}
@@ -107,6 +156,11 @@ export default function Navbar() {
             </>
           )}
         </div>
+
+        <SidebarSocial
+          open={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+        />
       </div>
     </header>
   );

@@ -11,6 +11,11 @@ const Details = () => {
   const item = location.state?.item;
   const { type, id } = useParams();
 
+  // Reinicia el scroll al top cuando cambia el id
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
   const fetchItemDetails = async () => {
     try {
       const response = await fetch(item.url);
