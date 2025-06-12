@@ -20,7 +20,7 @@ const Details = () => {
     try {
       const response = await fetch(item.url);
       const data = await response.json();
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       setItemDetailInfo(data.result);
     } catch (error) {
       setItemDetailInfo(null);

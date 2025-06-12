@@ -69,7 +69,7 @@ export const AppProvider = ({ children }) => {
     ]).then(() => {
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
+      }, 3000);
     });
   }, []);
 
